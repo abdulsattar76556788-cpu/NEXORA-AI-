@@ -1,40 +1,203 @@
 
-async function chat() {
-  const input = document.getElementById("chatInput");
-  const output = document.getElementById("chatOutput");
-  const message = input.value.trim();
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#091426">
+<meta name="description" content="NEXORA AI - All in One AI Platform">
+<link rel="manifest" href="manifest.json">
+<title>NEXORA AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#081426;color:#fff;font-family:Arial,sans-serif}
+header{padding:20px;background:#10213b;position:sticky;top:0;z-index:5}
+.logo{font-size:27px;font-weight:bold;color:#71aaff}
+header small{color:#a9bedc}
+nav{display:flex;gap:8px;overflow:auto;padding:12px;background:#0c1a30}
+nav button,.btn{border:0;border-radius:10px;padding:11px 15px;background:#244b83;color:white;white-space:nowrap}
+main{padding:15px;max-width:850px;margin:auto}
+.panel{background:#11223b;border:1px solid #233b5d;border-radius:16px;padding:16px;margin:14px 0}
+h2{color:#8dbbff;font-size:20px}
+input,textarea,select{width:100%;padding:13px;border:1px solid #355477;border-radius:10px;background:#09172b;color:white;margin:8px 0;font-size:16px}
+textarea{min-height:110px}
+.btn{background:#2765b9;width:100%;font-size:16px;margin-top:8px}
+.answer{white-space:pre-wrap;line-height:1.8;color:#d8e7ff}
+.tile{background:#1b3455;padding:16px;border-radius:12px;text-align:center}
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+footer{text-align:center;padding:25px;color:#9bb0ce}
+section{scroll-margin-top:120px}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">✦ NEXORA AI</div>
+ <small>آپ کا اپنا اسمارٹ AI پلیٹ فارم</small>
+</header>
 
-  if (!message) {
-    output.textContent = "براہ کرم اپنا سوال لکھیں۔";
-    return;
-  }
+<nav>
+ <button onclick="go('home')">Home</button>
+ <button onclick="go('chat')">AI Chat</button>
+ <button onclick="go('image')">Image</button>
+ <button onclick="go('video')">Video</button>
+ <button onclick="go('education')">Education</button>
+ <button onclick="go('tools')">Tools</button>
+</nav>
 
-  output.textContent = "🤖 NEXORA AI جواب تیار کر رہا ہے...";
-  input.disabled = true;
+<main>
+<section id="home" class="panel">
+ <h2>خوش آمدید NEXORA AI میں!</h2>
+ <p>ایک ہی جگہ مصنوعی ذہانت، تعلیم اور اسمارٹ ٹولز۔</p>
+ <div class="tiles">
+  <div class="tile">🤖<br>AI Chatbot</div>
+  <div class="tile">🎨<br>Image Tools</div>
+  <div class="tile">🎬<br>Video Tools</div>
+  <div class="tile">📚<br>Education</div>
+  <div class="tile">📝<br>MCQs</div>
+  <div class="tile">🧰<br>Smart Tools</div>
+ </div>
+</section>
 
-  try {
-    const response = await fetch(
-      "https://abdul-ai-server.abdulsattar76556788.workers.dev/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ message })
-      }
-    );
+<section id="chat" class="panel">
+ <h2>🤖 NEXORA AI Chatbot</h2>
+ <div id="chatOutput" class="answer">السلام علیکم! اپنا سوال لکھیے۔</div>
+ <textarea id="chatInput" placeholder="اپنا سوال یہاں لکھیں..."></textarea>
+ <button class="btn" onclick="chat()">سوال بھیجیں</button>
+</section>
 
-    const data = await response.json();
+<section id="image" class="panel">
+ <h2>🎨 AI Image Prompt</h2>
+ <p>اپنی تصویر کے لیے تفصیل لکھیں اور پرامپٹ تیار کریں۔</p>
+ <textarea id="imagePrompt" placeholder="مثلاً: Cinematic portrait in green field..."></textarea>
+ <button class="btn" onclick="makePrompt('imagePrompt','imageResult')">پرامپٹ تیار کریں</button>
+ <div id="imageResult" class="answer"></div>
+ <p><small>نوٹ: اصل تصویر بنانے کے لیے Image Generation API درکار ہے۔</small></p>
+</section>
 
-    if (!response.ok) {
-      throw new Error(data.error || "API connection failed");
-    }
+<section id="video" class="panel">
+ <h2>🎬 AI Video Tools</h2>
+ <textarea id="videoPrompt" placeholder="اپنی ویڈیو کا آئیڈیا لکھیں..."></textarea>
+ <button class="btn" onclick="makePrompt('videoPrompt','videoResult')">ویڈیو پرامپٹ تیار کریں</button>
+ <div id="videoResult" class="answer"></div>
+ <p><small>اصل ویڈیو جنریشن کے لیے الگ ویڈیو API درکار ہے۔</small></p>
+</section>
 
-    output.textContent = data.answer || "AI سے جواب موصول نہیں ہوا۔";
+<section id="education" class="panel">
+ <h2>📚 Education & MCQs</h2>
+ <select id="classSelect">
+  <option>Class 9</option><option>Class 10</option>
+  <option>Class 11</option><option>Class 12</option>
+ </select>
+ <select id="subjectSelect">
+  <option>اسلامیات</option><option>Physics</option>
+  <option>Biology</option><option>Chemistry</option>
+  <option>Mathematics</option><option>English</option>
+  <option>Urdu</option><option>Computer Science</option>
+ </select>
+ <div class="panel">
+  <p id="question">اسلام کے کتنے ارکان ہیں؟</p>
+  <div id="options"></div>
+  <p id="quizResult" class="answer"></p>
+  <button class="btn" onclick="nextQuestion()">اگلا سوال</button>
+ </div>
+</section>
 
-  } catch (error) {
-    output.textContent = "AI کنکشن میں مسئلہ ہے: " + error.message;
-  } finally {
-    input.disabled = false;
-  }
+<section id="tools" class="panel">
+ <h2>🧰 Smart Tools</h2>
+ <h3>Text Counter</h3>
+ <textarea id="counterText" oninput="countText()" placeholder="اپنا متن لکھیں..."></textarea>
+ <p id="countResult">الفاظ: 0 | حروف: 0</p>
+ <button class="btn" onclick="copyText()">متن کاپی کریں</button>
+</section>
+</main>
+
+<footer>
+ NEXORA AI © 2026<br>
+ Founder & Chief Admin: Abdul Sattar
+</footer>
+
+<script>
+function go(id){
+ document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
+
+async function chat(){
+ const input=document.getElementById("chatInput");
+ const output=document.getElementById("chatOutput");
+ const message=input.value.trim();
+ if(!message){output.textContent="براہ کرم اپنا سوال لکھیں۔";return;}
+ output.textContent="🤖 NEXORA AI جواب تیار کر رہا ہے...";
+ input.disabled=true;
+ try{
+  const response=await fetch(
+   "https://abdul-ai-server.abdulsattar76556788.workers.dev/",
+   {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({message})
+   }
+  );
+  const data=await response.json();
+  if(!response.ok)throw new Error(data.error||"API connection failed");
+  output.textContent=data.answer||"جواب موصول نہیں ہوا۔";
+ }catch(error){
+  output.textContent="کنکشن میں مسئلہ: "+error.message;
+ }finally{
+  input.disabled=false;
+ }
+}
+
+function makePrompt(inputId,resultId){
+ const value=document.getElementById(inputId).value.trim();
+ document.getElementById(resultId).textContent=
+ value ? "آپ کا پرامپٹ:\n"+value : "پہلے تفصیل لکھیں۔";
+}
+
+const questions=[
+ {q:"اسلام کے کتنے ارکان ہیں؟",o:["تین","پانچ","سات","آٹھ"],a:1},
+ {q:"قرآن مجید کس نبی پر نازل ہوا؟",o:["حضرت موسیٰؑ","حضرت عیسیٰؑ","حضرت محمد ﷺ","حضرت ابراہیمؑ"],a:2},
+ {q:"پاکستان کب آزاد ہوا؟",o:["1940","1947","1956","1965"],a:1},
+ {q:"پانی کا کیمیائی فارمولا کیا ہے؟",o:["CO2","O2","H2O","NaCl"],a:2}
+];
+let qi=0;
+function showQuestion(){
+ const q=questions[qi];
+ document.getElementById("question").textContent=q.q;
+ document.getElementById("quizResult").textContent="";
+ document.getElementById("options").innerHTML="";
+ q.o.forEach((option,i)=>{
+  const b=document.createElement("button");
+  b.className="btn";
+  b.textContent=option;
+  b.onclick=()=>{
+   document.getElementById("quizResult").textContent=
+    i===q.a?"درست جواب! شاباش 🎉":"غلط جواب۔ درست جواب: "+q.o[q.a];
+  };
+  document.getElementById("options").appendChild(b);
+ });
+}
+function nextQuestion(){
+ qi=(qi+1)%questions.length;
+ showQuestion();
+}
+function countText(){
+ const t=document.getElementById("counterText").value;
+ const words=t.trim()?t.trim().split(/\s+/).length:0;
+ document.getElementById("countResult").textContent=
+ "الفاظ: "+words+" | حروف: "+t.length;
+}
+function copyText(){
+ const t=document.getElementById("counterText").value;
+ if(t)navigator.clipboard.writeText(t).then(()=>alert("متن کاپی ہوگیا"));
+}
+showQuestion();
+
+if("serviceWorker" in navigator){
+ window.addEventListener("load",()=>{
+  navigator.serviceWorker.register("./sw.js").catch(()=>{});
+ });
+}
+</script>
+</body>
+                       </html>
+                       
