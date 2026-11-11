@@ -201,3 +201,57 @@ if("serviceWorker" in navigator){
 </body>
                        </html>
                        
+
+function makePrompt(inputId,resultId){
+ const value=document.getElementById(inputId).value.trim();
+ const output=document.getElementById(resultId);
+
+ if(!value){
+  output.textContent="براہ کرم پہلے اپنا آئیڈیا لکھیں۔";
+  return;
+ }
+
+ let prompt="";
+
+ if(inputId==="imagePrompt"){
+  prompt=`Create an ultra-realistic professional cinematic image based on this idea: ${value}.
+
+Quality: 4K UHD, highly detailed, professional DSLR photography.
+Lighting: Natural cinematic lighting, realistic shadows.
+Camera: Sharp focus, beautiful depth of field.
+Colors: Rich, vibrant and natural colors.
+Composition: Professional framing, 9:16 vertical format.
+Details: Realistic textures, natural skin, accurate proportions.
+Avoid: Blurry faces, distortion, extra fingers and artificial appearance.`;
+ }else{
+  prompt=`Create a professional cinematic video based on this idea: ${value}.
+
+Duration: 10 seconds.
+Format: Vertical 9:16.
+Quality: 4K UHD.
+Camera: Smooth cinematic camera movements.
+Motion: Natural and realistic movements.
+Lighting: Professional cinematic lighting.
+Environment: Detailed realistic background.
+Editing: Smooth transitions and professional film look.
+Audio: Suitable background music and natural sound effects.
+Avoid: Distorted faces, unnatural movement and visual glitches.`;
+ }
+
+ output.textContent=prompt;
+
+ const copy=document.createElement("button");
+ copy.className="btn";
+ copy.textContent="📋 پرامپٹ کاپی کریں";
+ copy.onclick=async()=>{
+  try{
+   await navigator.clipboard.writeText(prompt);
+   copy.textContent="✓ کاپی ہوگیا";
+  }catch(e){
+   alert("کاپی نہیں ہوسکا، متن کو منتخب کرکے کاپی کریں۔");
+  }
+ };
+
+ output.appendChild(document.createElement("br"));
+ output.appendChild(copy);
+}
