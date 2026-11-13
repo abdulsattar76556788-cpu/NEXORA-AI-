@@ -6,6 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080b18">
 <meta name="description" content="NEXORA AI - Your Smart AI World">
+
+<!-- PWA SETTINGS -->
+<link rel="manifest" href="/NEXORA-AI-/manifest.json">
+<link rel="apple-touch-icon" href="/NEXORA-AI-/icons/icon-192.png">
+
 <title>NEXORA AI | Smart AI Platform</title>
 
 <style>
@@ -167,6 +172,7 @@ footer{
 <section id="education" class="panel">
 <h2>🎓 NEXORA Education</h2>
 <p>اپنی کلاس منتخب کریں:</p>
+
 <select id="classSelect">
 <option value="9">Class 9</option>
 <option value="10">Class 10</option>
@@ -496,8 +502,22 @@ function clearText(){
  toolText.value="";
  toolText.dispatchEvent(new Event("input"));
 }
+
+/* PWA SERVICE WORKER */
+if("serviceWorker" in navigator){
+ window.addEventListener("load",()=>{
+  navigator.serviceWorker.register(
+   "/NEXORA-AI-/service-worker.js",
+   {scope:"/NEXORA-AI-/"}
+  ).then(()=>{
+   console.log("NEXORA AI PWA Ready");
+  }).catch(error=>{
+   console.log("PWA Registration Error:",error);
+  });
+ });
+}
 </script>
 
 </body>
- </html>
+                                                         </html>
  
