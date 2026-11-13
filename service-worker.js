@@ -1,10 +1,10 @@
 
-const CACHE_NAME = "nexora-ai-v1";
+const CACHE_NAME = "nexora-ai-v2";
 
 const FILES = [
-  "/NEXORA-AI/",
-  "/NEXORA-AI/index.html",
-  "/NEXORA-AI/manifest.json"
+  "/NEXORA-AI-/",
+  "/NEXORA-AI-/index.html",
+  "/NEXORA-AI-/manifest.json"
 ];
 
 self.addEventListener("install", event => {
@@ -32,11 +32,15 @@ self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
 
   const url = new URL(event.request.url);
+
   if (url.origin !== self.location.origin) return;
 
   event.respondWith(
-    fetch(event.request).catch(() =>
-      caches.match(event.request)
-    )
+    fetch(event.request).catch(async () => {
+      return await caches.match(event.request) ||
+        new Response("Offline", {
+          status: 503
+        });
+    })
   );
 });
