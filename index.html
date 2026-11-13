@@ -1,768 +1,503 @@
-<!DOCTYPE html>  <html lang="ur" dir="rtl">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1">  
-<meta name="theme-color" content="#091426">  
-<meta name="description" content="NEXORA AI - All in One AI Platform">  
-<link rel="manifest" href="manifest.json">  
-<title>NEXORA AI</title>  <style>  
-*{box-sizing:border-box}  
-html{scroll-behavior:smooth}  
-body{  
- margin:0;  
- background:#081426;  
- color:#fff;  
- font-family:Arial,sans-serif;  
-}  
-header{  
- padding:20px;  
- background:#10213b;  
- position:sticky;  
- top:0;  
- z-index:5;  
-}  
-.logo{  
- font-size:27px;  
- font-weight:bold;  
- color:#71aaff;  
-}  
-header small{color:#a9bedc}  
-nav{  
- display:flex;  
- gap:8px;  
- overflow:auto;  
- padding:12px;  
- background:#0c1a30;  
-}  
-nav button,.btn{  
- border:0;  
- border-radius:10px;  
- padding:11px 15px;  
- background:#244b83;  
- color:white;  
- white-space:nowrap;  
- cursor:pointer;  
-}  
-nav button:hover,.btn:hover{background:#387bd0}  
-main{  
- padding:15px;  
- max-width:850px;  
- margin:auto;  
-}  
-.panel{  
- background:#11223b;  
- border:1px solid #233b5d;  
- border-radius:16px;  
- padding:16px;  
- margin:14px 0;  
-}  
-h2{color:#8dbbff;font-size:20px}  
-input,textarea,select{  
- width:100%;  
- padding:13px;  
- border:1px solid #355477;  
- border-radius:10px;  
- background:#09172b;  
- color:white;  
- margin:8px 0;  
- font-size:16px;  
-}  
-textarea{min-height:110px;resize:vertical}  
-.btn{  
- background:#2765b9;  
- width:100%;  
- font-size:16px;  
- margin-top:8px;  
-}  
-.answer{  
- white-space:pre-wrap;  
- line-height:1.8;  
- color:#d8e7ff;  
- overflow-wrap:anywhere;  
-}  
-.tile{  
- background:#1b3455;  
- padding:16px;  
- border-radius:12px;  
- text-align:center;  
-}  
-.tiles{  
- display:grid;  
- grid-template-columns:repeat(2,1fr);  
- gap:10px;  
-}  
-footer{  
- text-align:center;  
- padding:25px;  
- color:#9bb0ce;  
-}  
-section{scroll-margin-top:120px}  
-.status{  
- color:#7bffbd;  
- font-size:13px;  
- margin-top:8px;  
-}  
-@media(min-width:600px){  
- .tiles{grid-template-columns:repeat(3,1fr)}  
-}  
-</style>  </head>  <body>  <header>  
- <div class="logo">✦ NEXORA AI</div>  
- <small>آپ کا اپنا اسمارٹ AI پلیٹ فارم</small>  
- <div class="status">● AI Platform</div>  
-</header>  <nav>  
- <button onclick="go('home')">Home</button>  
- <button onclick="go('chat')">AI Chat</button>  
- <button onclick="go('image')">Image</button>  
- <button onclick="go('video')">Video</button>  
- <button onclick="go('education')">Education</button>  
- <button onclick="go('tools')">Tools</button>  
-</nav>  <main>  <section id="home" class="panel">  
- <h2>خوش آمدید NEXORA AI میں!</h2>  
- <p>ایک ہی جگہ مصنوعی ذہانت، تعلیم اور اسمارٹ ٹولز۔</p>   <div class="tiles">  
-  <div class="tile">🤖<br>AI Chatbot</div>  
-  <div class="tile">🎨<br>Image Tools</div>  
-  <div class="tile">🎬<br>Video Tools</div>  
-  <div class="tile">📚<br>Education</div>  
-  <div class="tile">📝<br>MCQs</div>  
-  <div class="tile">🧰<br>Smart Tools</div>  
- </div>  
-</section>  <!-- AI CHATBOT -->  <section id="chat" class="panel">  
- <h2>🤖 NEXORA AI Chatbot</h2>   <div id="chatOutput" class="answer">  
- السلام علیکم! اپنا سوال لکھیے۔  
- </div>   <textarea id="chatInput"  
- placeholder="اپنا سوال یہاں لکھیں..."></textarea>   <button class="btn" id="sendBtn" onclick="chat()">  
- سوال بھیجیں  
- </button>  
-</section>  <!-- IMAGE GENERATOR -->  <section id="image" class="panel">  
- <h2>🎨 AI Image Generator Tools</h2>   <p>اپنی تصویر کے لیے تفصیل لکھیں اور پروفیشنل پرامپٹ تیار کریں۔</p>   <textarea id="imagePrompt"  
- placeholder="مثلاً: Cinematic portrait in green field..."></textarea>  <button class="btn"  
-onclick="makePrompt('imagePrompt','imageResult')">
-تصویر کا پرامپٹ تیار کریں
-</button>
 
- <div id="imageResult" class="answer"></div>   <p><small>  
- نوٹ: اصل تصویر بنانے کے لیے Image Generation API درکار ہے۔  
- </small></p>  
-</section>  <!-- VIDEO TOOLS -->  <section id="video" class="panel">  
- <h2>🎬 AI Video Tools</h2>   <textarea id="videoPrompt"  
- placeholder="اپنی ویڈیو کا آئیڈیا لکھیں..."></textarea>  <button class="btn"  
-onclick="makePrompt('videoPrompt','videoResult')">
-ویڈیو پرامپٹ تیار کریں
-</button>
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080b18">
+<meta name="description" content="NEXORA AI - Your Smart AI World">
+<title>NEXORA AI | Smart AI Platform</title>
 
- <div id="videoResult" class="answer"></div>   <p><small>  
- اصل ویڈیو جنریشن کے لیے الگ Video API درکار ہے۔  
- </small></p>  
-</section>  <!-- EDUCATION -->  <section id="education" class="panel">  
- <h2>📚 Education & MCQs</h2>   <select id="classSelect">  
-  <option>Class 9</option>  
-  <option>Class 10</option>  
-  <option>Class 11</option>  
-  <option>Class 12</option>  
- </select>   <select id="subjectSelect">  
-  <option>اسلامیات</option>  
-  <option>Physics</option>  
-  <option>Biology</option>  
-  <option>Chemistry</option>  
-  <option>Mathematics</option>  
-  <option>English</option>  
-  <option>Urdu</option>  
-  <option>Computer Science</option>  
- </select>   <div class="panel">  
-  <p id="question">اسلام کے کتنے ارکان ہیں؟</p>  
-  <div id="options"></div>  
-  <p id="quizResult" class="answer"></p>    <button class="btn" onclick="nextQuestion()">  
-  اگلا سوال  
-  </button>  
- </div>  
-</section>  <!-- SMART TOOLS -->  <section id="tools" class="panel">  
- <h2>🧰 Smart Tools</h2>   <h3>Text Counter</h3>   <textarea id="counterText"  
- oninput="countText()"  
- placeholder="اپنا متن لکھیں..."></textarea>   <p id="countResult">الفاظ: 0 | حروف: 0</p>   <button class="btn" onclick="copyText()">  
- متن کاپی کریں  
- </button>  
-</section>  </main>  <footer>  
- NEXORA AI © 2026<br>  
- Founder & Chief Admin: Abdul Sattar  
-</footer>  <script>  
-  
-// NAVIGATION  
-  
-function go(id){  
- document.getElementById(id).scrollIntoView({  
-  behavior:"smooth"  
- });  
-}  
-  
-// GROQ AI CHATBOT  
-  
-async function chat(){  
-  
- const input=document.getElementById("chatInput");  
- const output=document.getElementById("chatOutput");  
- const button=document.getElementById("sendBtn");  
-  
- const message=input.value.trim();  
-  
- if(!message){  
-  output.textContent="براہ کرم اپنا سوال لکھیں۔";  
-  return;  
- }  
-  
- output.textContent="🤖 NEXORA AI جواب تیار کر رہا ہے...";  
- input.disabled=true;  
- button.disabled=true;  
-  
- try{  
-  
-  const response=await fetch(  
-   "https://abdul-ai-server.abdulsattar76556788.workers.dev/",  
-   {  
-    method:"POST",  
-    headers:{  
-     "Content-Type":"application/json"  
-    },  
-    body:JSON.stringify({message})  
-   }  
-  );  
-  
-  const data=await response.json();  
-  
-  if(!response.ok){  
-   throw new Error(data.error || "API connection failed");  
-  }  
-  
-  // Cloudflare Worker returns reply  
-  
-  output.textContent=  
-   data.reply || data.answer || "جواب موصول نہیں ہوا۔";  
-  
-  input.value="";  
-  
- }catch(error){  
-  
-  output.textContent=  
-   "کنکشن میں مسئلہ: "+error.message;  
-  
- }finally{  
-  
-  input.disabled=false;  
-  button.disabled=false;  
-  
- }  
-}  
-  
-// IMAGE AND VIDEO PROMPTS  
-  
-function makePrompt(inputId,resultId){  
-  
- const value=document.getElementById(inputId).value.trim();  
- const output=document.getElementById(resultId);  
-  
- if(!value){  
-  output.textContent="براہ کرم پہلے اپنا آئیڈیا لکھیں۔";  
-  return;  
- }  
-  
- let prompt="";  
-  
- if(inputId==="imagePrompt"){  
-  
-  prompt=`Create an ultra-realistic professional cinematic image based on this idea: ${value}.  
-  
-Quality: 4K UHD, highly detailed, professional DSLR photography.  
-Lighting: Natural cinematic lighting, realistic shadows.  
-Camera: Sharp focus, beautiful depth of field.  
-Colors: Rich, vibrant and natural colors.  
-Composition: Professional framing, 9:16 vertical format.  
-Details: Realistic textures, natural skin, accurate proportions.  
-Avoid: Blurry faces, distortion, extra fingers and artificial appearance.`;  
-  
- }else{  
-  
-  prompt=`Create a professional cinematic video based on this idea: ${value}.  
-  
-Duration: 10 seconds.  
-Format: Vertical 9:16.  
-Quality: 4K UHD.  
-Camera: Smooth cinematic camera movements.  
-Motion: Natural and realistic movements.  
-Lighting: Professional cinematic lighting.  
-Environment: Detailed realistic background.  
-Editing: Smooth transitions and professional film look.  
-Audio: Suitable background music and natural sound effects.  
-Avoid: Distorted faces, unnatural movement and visual glitches.`;  
-  
- }  
-  
- output.textContent=prompt;  
-  
- const copy=document.createElement("button");  
-  
- copy.className="btn";  
- copy.textContent="📋 پرامپٹ کاپی کریں";  
-  
- copy.onclick=async()=>{  
-  
-  try{  
-   await navigator.clipboard.writeText(prompt);  
-   copy.textContent="✓ کاپی ہوگیا";  
-  }catch(e){  
-   alert("کاپی نہیں ہوسکا، متن منتخب کرکے کاپی کریں۔");  
-  }  
-  
- };  
-  
- output.appendChild(document.createElement("br"));  
- output.appendChild(copy);  
-  
-}  
-  
-// MCQS  
-  
-const questions=[  
-  
- {  
-  q:"اسلام کے کتنے ارکان ہیں؟",  
-  o:["تین","پانچ","سات","آٹھ"],  
-  a:1  
- },  
-  
- {  
-  q:"قرآن مجید کس نبی پر نازل ہوا؟",  
-  o:["حضرت موسیٰؑ","حضرت عیسیٰؑ","حضرت محمد ﷺ","حضرت ابراہیمؑ"],  
-  a:2  
- },  
-  
- {  
-  q:"پاکستان کب آزاد ہوا؟",  
-  o:["1940","1947","1956","1965"],  
-  a:1  
- },  
-  
- {  
-  q:"پانی کا کیمیائی فارمولا کیا ہے؟",  
-  o:["CO2","O2","H2O","NaCl"],  
-  a:2  
- }  
-  
-];  
-  
-let qi=0;  
-  
-function showQuestion(){  
-  
- const q=questions[qi];  
-  
- document.getElementById("question").textContent=q.q;  
-  
- document.getElementById("quizResult").textContent="";  
-  
- document.getElementById("options").innerHTML="";  
-  
- q.o.forEach((option,i)=>{  
-  
-  const b=document.createElement("button");  
-  
-  b.className="btn";  
-  b.textContent=option;  
-  
-  b.onclick=()=>{  
-  
-   document.getElementById("quizResult").textContent=  
-    i===q.a  
-    ?"درست جواب! شاباش 🎉"  
-    :"غلط جواب۔ درست جواب: "+q.o[q.a];  
-  
-  };  
-  
-  document.getElementById("options").appendChild(b);  
-  
- });  
-  
-}  
-  
-function nextQuestion(){  
-  
- qi=(qi+1)%questions.length;  
-  
- showQuestion();  
-  
-}  
-  
-// TEXT COUNTER  
-  
-function countText(){  
-  
- const t=document.getElementById("counterText").value;  
-  
- const words=t.trim()?t.trim().split(/\s+/).length:0;  
-  
- document.getElementById("countResult").textContent=  
- "الفاظ: "+words+" | حروف: "+t.length;  
-  
-}  
-  
-// COPY TEXT  
-  
-function copyText(){  
-  
- const t=document.getElementById("counterText").value;  
-  
- if(t){  
-  
-  navigator.clipboard.writeText(t)  
-   .then(()=>alert("متن کاپی ہوگیا۔"))  
-   .catch(()=>alert("متن کاپی نہیں ہوسکا۔"));  
-  
- }  
-  
-}  
-  
-// INITIALIZE  
-  
-showQuestion();  
-  
-// PWA SERVICE WORKER  
-  
-if("serviceWorker" in navigator){  
-  
- window.addEventListener("load",()=>{  
-  
-  navigator.serviceWorker.register("./sw.js")  
-   .catch(error=>console.log("PWA:",error));  
-  
- });  
-  
-}  
-  
-</script>  </body>  
-  </html>
-// ===================================
-// NEXORA AI - SMART DUAL API CHATBOT
-// GROQ + OPENROUTER + CHAT MEMORY
-// ===================================
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#080b18;
+ color:#fff;
+}
+header{
+ padding:18px;
+ text-align:center;
+ background:#10172b;
+ border-bottom:1px solid #263657;
+}
+header h1{
+ margin:0;
+ color:#35eaff;
+ font-size:30px;
+}
+header p{color:#aaa;margin:8px 0 0}
+nav{
+ display:flex;
+ gap:8px;
+ padding:12px;
+ overflow-x:auto;
+ background:#0c1325;
+ position:sticky;
+ top:0;
+ z-index:5;
+}
+nav button{
+ flex-shrink:0;
+ padding:11px 16px;
+ border:1px solid #263c60;
+ border-radius:10px;
+ background:#151f36;
+ color:white;
+ cursor:pointer;
+}
+nav button:hover,.active{
+ background:#087f9e!important;
+}
+main{
+ max-width:900px;
+ margin:auto;
+ padding:15px;
+}
+.panel{
+ display:none;
+ background:#10182b;
+ border:1px solid #243653;
+ border-radius:16px;
+ padding:18px;
+ margin-bottom:18px;
+}
+.panel.show{display:block}
+h2{color:#35eaff}
+input,textarea,select{
+ width:100%;
+ padding:14px;
+ margin:8px 0;
+ border:1px solid #344967;
+ border-radius:10px;
+ background:#080f20;
+ color:white;
+ font-size:15px;
+}
+textarea{min-height:110px;resize:vertical}
+.btn{
+ padding:12px 18px;
+ border:0;
+ border-radius:10px;
+ background:linear-gradient(90deg,#00bcd4,#7655ff);
+ color:white;
+ font-weight:bold;
+ cursor:pointer;
+ margin:5px 0;
+}
+.btn:disabled{opacity:.5}
+.answer{
+ white-space:pre-wrap;
+ overflow-wrap:anywhere;
+ line-height:1.8;
+ background:#080f20;
+ border:1px solid #263b5b;
+ padding:14px;
+ border-radius:10px;
+ margin-top:12px;
+ min-height:40px;
+}
+.small{color:#9baac2;font-size:13px}
+.chatrow{margin:12px 0}
+.chatrow strong{color:#35eaff}
+video{width:100%;border-radius:12px;margin-top:12px}
+footer{
+ text-align:center;
+ color:#9baac2;
+ padding:25px;
+ border-top:1px solid #263653;
+}
+</style>
+</head>
 
-const WORKER_URL =
-"https://abdul-ai-server.abdulsattar76556788.workers.dev/";
+<body>
 
-const MEMORY_KEY = "nexora_chat_history_v1";
+<header>
+<h1>⚡ NEXORA AI</h1>
+<p>YOUR SMART AI WORLD</p>
+<p class="small">Chat • Video • Education • Smart Tools</p>
+</header>
 
-let chatHistory = [];
+<nav>
+<button class="active" onclick="showPanel('chat',this)">🤖 AI Chat</button>
+<button onclick="showPanel('video',this)">🎬 AI Video</button>
+<button onclick="showPanel('education',this)">🎓 Education</button>
+<button onclick="showPanel('tools',this)">🛠️ Tools</button>
+</nav>
 
-try {
-  chatHistory = JSON.parse(
-    localStorage.getItem(MEMORY_KEY) || "[]"
-  );
+<main>
 
-  if (!Array.isArray(chatHistory)) chatHistory = [];
-} catch (e) {
-  chatHistory = [];
+<!-- AI CHATBOT -->
+<section id="chat" class="panel show">
+<h2>🤖 NEXORA AI Chatbot</h2>
+<p class="small">اپنا سوال لکھیں، NEXORA AI سے جواب حاصل کریں۔</p>
+
+<div id="chatHistory" class="answer">
+السلام علیکم! میں NEXORA AI ہوں۔ آپ کی کیا مدد کرسکتا ہوں؟
+</div>
+
+<textarea id="chatInput" placeholder="اپنا سوال یہاں لکھیں..."></textarea>
+
+<button class="btn" id="sendBtn" onclick="sendMessage()">پیغام بھیجیں ➤</button>
+<button class="btn" onclick="clearChat()">🗑️ چیٹ صاف کریں</button>
+<p class="small">چیٹ کی ہسٹری اسی براؤزر میں محفوظ ہوتی ہے۔</p>
+</section>
+
+<!-- VIDEO GENERATOR -->
+<section id="video" class="panel">
+<h2>🎬 Magic Hour AI Video Generator</h2>
+<p class="small">اپنی ویڈیو کا آئیڈیا لکھیں۔ AI ویڈیو بنانے کی درخواست بھیجے گا۔</p>
+
+<textarea id="videoPrompt" placeholder="مثلاً: ایک خوبصورت سبز باغ میں چلتا ہوا گھوڑا، سنیماٹک ویڈیو..."></textarea>
+
+<label>ویڈیو کا دورانیہ</label>
+<select id="videoDuration">
+<option value="5">5 Seconds</option>
+<option value="10" selected>10 Seconds</option>
+</select>
+
+<button class="btn" id="videoBtn" onclick="generateVideo()">🎬 AI ویڈیو بنائیں</button>
+
+<div id="videoResult" class="answer">آپ کی ویڈیو یہاں ظاہر ہوگی۔</div>
+<div id="videoOutput"></div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="panel">
+<h2>🎓 NEXORA Education</h2>
+<p>اپنی کلاس منتخب کریں:</p>
+<select id="classSelect">
+<option value="9">Class 9</option>
+<option value="10">Class 10</option>
+<option value="11">Class 11</option>
+<option value="12">Class 12</option>
+</select>
+
+<select id="subjectSelect">
+<option>Physics</option>
+<option>Chemistry</option>
+<option>Biology</option>
+<option>Mathematics</option>
+<option>English</option>
+<option>Urdu</option>
+<option>Computer Science</option>
+<option>Islamic Studies</option>
+</select>
+
+<button class="btn" onclick="makeQuiz()">MCQs شروع کریں</button>
+<div id="quizBox" class="answer">MCQs یہاں ظاہر ہوں گے۔</div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools" class="panel">
+<h2>🛠️ Smart Text Tools</h2>
+<textarea id="toolText" placeholder="اپنا متن لکھیں..."></textarea>
+<p id="wordCount" class="small">الفاظ: 0 | حروف: 0</p>
+<button class="btn" onclick="copyText()">📋 Copy Text</button>
+<button class="btn" onclick="clearText()">صاف کریں</button>
+</section>
+
+</main>
+
+<footer>
+<h3>NEXORA AI</h3>
+<p>Founder & Chief Admin: Abdul Sattar</p>
+<p>Quality AI & Education For Everyone</p>
+</footer>
+
+<script>
+/* NEXORA AI SERVER */
+const NEXORA_SERVER =
+"https://abdul-ai-server.abdulsattar76556788.workers.dev";
+
+/* NAVIGATION */
+function showPanel(id,button){
+ document.querySelectorAll(".panel").forEach(p=>p.classList.remove("show"));
+ document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+ document.getElementById(id).classList.add("show");
+ button.classList.add("active");
 }
 
-function saveMemory() {
-  try {
-    chatHistory = chatHistory.slice(-40);
-    localStorage.setItem(
-      MEMORY_KEY,
-      JSON.stringify(chatHistory)
-    );
-  } catch (e) {
-    console.log("Memory save error:", e);
-  }
+/* CHAT MEMORY */
+const chatHistory = document.getElementById("chatHistory");
+let messages = [];
+
+try{
+ messages = JSON.parse(localStorage.getItem("nexora_chat") || "[]");
+}catch(e){messages=[];}
+
+function renderChat(){
+ chatHistory.innerHTML="";
+ if(!messages.length){
+  chatHistory.textContent="السلام علیکم! میں NEXORA AI ہوں۔";
+  return;
+ }
+ messages.forEach(m=>{
+  const div=document.createElement("div");
+  div.className="chatrow";
+  const title=document.createElement("strong");
+  title.textContent=m.role==="user"?"آپ: ":"NEXORA AI: ";
+  const content=document.createElement("span");
+  content.textContent=m.content;
+  div.append(title,content);
+  chatHistory.appendChild(div);
+ });
+ chatHistory.scrollTop=chatHistory.scrollHeight;
 }
 
-// Restore previous conversation
+renderChat();
 
-function restoreChat() {
-  const output = document.getElementById("chatOutput");
-
-  if (chatHistory.length > 0) {
-    const lastMessages = chatHistory.slice(-10);
-
-    output.textContent = lastMessages.map(m =>
-      (m.role === "user" ? "آپ: " : "NEXORA AI: ") +
-      m.content
-    ).join("\n\n");
-  }
+function saveChat(){
+ localStorage.setItem("nexora_chat",JSON.stringify(messages));
 }
 
-// NAVIGATION
+async function sendMessage(){
+ const input=document.getElementById("chatInput");
+ const button=document.getElementById("sendBtn");
+ const message=input.value.trim();
 
-function go(id) {
-  document.getElementById(id).scrollIntoView({
-    behavior: "smooth"
+ if(!message)return;
+
+ messages.push({role:"user",content:message});
+ saveChat();
+ renderChat();
+ input.value="";
+ button.disabled=true;
+ button.textContent="جواب تیار ہو رہا ہے...";
+
+ try{
+  const response=await fetch(NEXORA_SERVER,{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({message:message})
   });
+
+  const data=await response.json();
+
+  if(!response.ok){
+   throw new Error(data.error || data.message || "Server error");
+  }
+
+  const answer=
+   data.reply || data.answer || data.message ||
+   "سرور سے جواب موصول نہیں ہوا۔";
+
+  messages.push({role:"assistant",content:answer});
+  saveChat();
+  renderChat();
+
+ }catch(error){
+  messages.push({
+   role:"assistant",
+   content:"کنکشن میں مسئلہ: "+error.message
+  });
+  saveChat();
+  renderChat();
+ }finally{
+  button.disabled=false;
+  button.textContent="پیغام بھیجیں ➤";
+ }
 }
 
-// AI CHAT
+document.getElementById("chatInput").addEventListener("keydown",function(e){
+ if(e.key==="Enter" && !e.shiftKey){
+  e.preventDefault();
+  sendMessage();
+ }
+});
 
-async function chat() {
-
-  const input = document.getElementById("chatInput");
-  const output = document.getElementById("chatOutput");
-  const button = document.getElementById("sendBtn");
-
-  const message = input.value.trim();
-
-  if (!message) {
-    output.textContent = "براہ کرم اپنا سوال لکھیں۔";
-    return;
-  }
-
-  const oldText = output.textContent;
-
-  input.disabled = true;
-  button.disabled = true;
-
-  output.textContent =
-    "🤖 NEXORA AI جواب تیار کر رہا ہے...";
-
-  try {
-
-    const response = await fetch(WORKER_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        message: message,
-        history: chatHistory.slice(-20)
-      })
-    });
-
-    const data = await response.json();
-
-    if (!response.ok || !data.success) {
-      throw new Error(
-        data.error || "AI service unavailable"
-      );
-    }
-
-    const answer = data.answer || data.reply;
-
-    if (!answer) {
-      throw new Error("AI نے جواب نہیں دیا۔");
-    }
-
-    // Save user message
-
-    chatHistory.push({
-      role: "user",
-      content: message
-    });
-
-    // Save AI answer
-
-    chatHistory.push({
-      role: "assistant",
-      content: answer
-    });
-
-    saveMemory();
-
-    output.textContent =
-      "آپ: " + message +
-      "\n\nNEXORA AI (" + (data.provider || "AI") + "):\n" +
-      answer;
-
-    input.value = "";
-
-  } catch (error) {
-
-    output.textContent =
-      "کنکشن میں مسئلہ: " + error.message;
-
-  } finally {
-
-    input.disabled = false;
-    button.disabled = false;
-    input.focus();
-
-  }
+function clearChat(){
+ if(confirm("کیا آپ واقعی پوری چیٹ صاف کرنا چاہتے ہیں؟")){
+  messages=[];
+  saveChat();
+  renderChat();
+ }
 }
 
-// IMAGE AND VIDEO PROMPTS
+/* MAGIC HOUR VIDEO GENERATOR */
+async function generateVideo(){
+ const prompt=document.getElementById("videoPrompt").value.trim();
+ const duration=Number(document.getElementById("videoDuration").value);
+ const button=document.getElementById("videoBtn");
+ const result=document.getElementById("videoResult");
+ const output=document.getElementById("videoOutput");
 
-function makePrompt(inputId, resultId) {
+ if(!prompt){
+  result.textContent="براہ کرم ویڈیو کا آئیڈیا لکھیں۔";
+  return;
+ }
 
-  const value =
-    document.getElementById(inputId).value.trim();
+ button.disabled=true;
+ output.innerHTML="";
+ result.textContent="ویڈیو بنانے کی درخواست بھیجی جا رہی ہے...";
 
-  const output =
-    document.getElementById(resultId);
+ try{
+  const createResponse=await fetch(NEXORA_SERVER+"/video/create",{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({
+    prompt:prompt,
+    duration:duration,
+    aspect_ratio:"9:16"
+   })
+  });
 
-  if (!value) {
-    output.textContent =
-      "براہ کرم پہلے اپنا آئیڈیا لکھیں۔";
-    return;
+  const created=await createResponse.json();
+
+  if(!createResponse.ok){
+   throw new Error(created.error || created.message || "Video request failed");
   }
 
-  let prompt = "";
+  const projectId=created.project_id || created.id;
 
-  if (inputId === "imagePrompt") {
-
-    prompt = `Create an ultra-realistic professional cinematic image based on this idea: ${value}.
-
-Quality: 4K UHD, highly detailed, professional DSLR photography.
-Lighting: Natural cinematic lighting, realistic shadows.
-Camera: Sharp focus, beautiful depth of field.
-Colors: Rich, vibrant and natural colors.
-Composition: Professional framing, 9:16 vertical format.
-Details: Realistic textures, natural skin, accurate proportions.
-Avoid: Blurry faces, distortion, extra fingers and artificial appearance.`;
-
-  } else {
-
-    prompt = `Create a professional cinematic video based on this idea: ${value}.
-
-Duration: 10 seconds.
-Format: Vertical 9:16.
-Quality: 4K UHD.
-Camera: Smooth cinematic camera movements.
-Motion: Natural and realistic movements.
-Lighting: Professional cinematic lighting.
-Environment: Detailed realistic background.
-Editing: Smooth transitions and professional film look.
-Audio: Suitable background music and natural sound effects.
-Avoid: Distorted faces, unnatural movement and visual glitches.`;
-
+  if(!projectId){
+   throw new Error("سرور سے Video Project ID نہیں ملی۔");
   }
 
-  output.textContent = prompt;
+  result.textContent="درخواست قبول ہوگئی۔ ویڈیو تیار ہو رہی ہے...";
 
-  const copy = document.createElement("button");
+  let completed=false;
 
-  copy.className = "btn";
-  copy.textContent = "📋 پرامپٹ کاپی کریں";
+  for(let i=0;i<45;i++){
+   await new Promise(resolve=>setTimeout(resolve,8000));
 
-  copy.onclick = async () => {
-    try {
-      await navigator.clipboard.writeText(prompt);
-      copy.textContent = "✓ کاپی ہوگیا";
-    } catch (e) {
-      alert("کاپی نہیں ہوسکا۔");
+   const statusResponse=await fetch(
+    NEXORA_SERVER+"/video/status?id="+encodeURIComponent(projectId)
+   );
+
+   const statusData=await statusResponse.json();
+
+   if(!statusResponse.ok){
+    throw new Error(statusData.error || "Status check failed");
+   }
+
+   const status=String(statusData.status || "").toLowerCase();
+
+   result.textContent="ویڈیو تیار ہو رہی ہے... ("+(i+1)+"/45) — "+status;
+
+   if(status==="complete" || status==="completed"){
+    const downloads=statusData.downloads;
+    let videoUrl=statusData.video_url || "";
+
+    if(!videoUrl && Array.isArray(downloads) && downloads.length){
+     videoUrl=downloads[0].url || downloads[0].download_url || "";
     }
-  };
 
-  output.appendChild(document.createElement("br"));
-  output.appendChild(copy);
+    if(!videoUrl && downloads && !Array.isArray(downloads)){
+     videoUrl=downloads.url || downloads.download_url || "";
+    }
+
+    if(!videoUrl){
+     throw new Error("ویڈیو تیار ہوگئی مگر Download URL نہیں ملی۔");
+    }
+
+    const video=document.createElement("video");
+    video.controls=true;
+    video.playsInline=true;
+    video.src=videoUrl;
+
+    const link=document.createElement("a");
+    link.href=videoUrl;
+    link.target="_blank";
+    link.rel="noopener";
+    link.textContent="⬇️ ویڈیو ڈاؤن لوڈ کریں";
+    link.className="btn";
+    link.style.display="inline-block";
+    link.style.textDecoration="none";
+    link.style.marginTop="12px";
+
+    output.append(video,document.createElement("br"),link);
+    result.textContent="✅ آپ کی AI ویڈیو تیار ہوگئی!";
+    completed=true;
+    break;
+   }
+
+   if(status==="error" || status==="failed" || status==="canceled"){
+    throw new Error(statusData.error || "ویڈیو بنانے میں مسئلہ آگیا۔");
+   }
+  }
+
+  if(!completed){
+   result.textContent="ویڈیو ابھی تیار نہیں ہوئی۔ کچھ دیر بعد دوبارہ Status چیک کریں۔";
+  }
+
+ }catch(error){
+  result.textContent="❌ مسئلہ: "+error.message;
+ }finally{
+  button.disabled=false;
+ }
 }
 
-// MCQS
-
-const questions = [
-  {
-    q: "اسلام کے کتنے ارکان ہیں؟",
-    o: ["تین", "پانچ", "سات", "آٹھ"],
-    a: 1
-  },
-  {
-    q: "قرآن مجید کس نبی پر نازل ہوا؟",
-    o: [
-      "حضرت موسیٰؑ",
-      "حضرت عیسیٰؑ",
-      "حضرت محمد ﷺ",
-      "حضرت ابراہیمؑ"
-    ],
-    a: 2
-  },
-  {
-    q: "پاکستان کب آزاد ہوا؟",
-    o: ["1940", "1947", "1956", "1965"],
-    a: 1
-  },
-  {
-    q: "پانی کا کیمیائی فارمولا کیا ہے؟",
-    o: ["CO2", "O2", "H2O", "NaCl"],
-    a: 2
-  }
+/* EDUCATION MCQS */
+const questions=[
+ {q:"پاکستان کا دارالحکومت کیا ہے؟",a:["کراچی","اسلام آباد","لاہور","ملتان"],correct:1},
+ {q:"پانی کا کیمیائی فارمولا کیا ہے؟",a:["CO2","O2","H2O","NaCl"],correct:2},
+ {q:"سورج کس سمت سے نکلتا ہے؟",a:["مشرق","مغرب","شمال","جنوب"],correct:0},
+ {q:"ایک ہفتے میں کتنے دن ہوتے ہیں؟",a:["5","6","7","8"],correct:2}
 ];
 
-let qi = 0;
+let currentQuestion=0;
 
-function showQuestion() {
-
-  const q = questions[qi];
-
-  document.getElementById("question").textContent = q.q;
-
-  document.getElementById("quizResult").textContent = "";
-
-  document.getElementById("options").innerHTML = "";
-
-  q.o.forEach((option, i) => {
-
-    const b = document.createElement("button");
-
-    b.className = "btn";
-    b.textContent = option;
-
-    b.onclick = () => {
-
-      document.getElementById("quizResult").textContent =
-        i === q.a
-          ? "درست جواب! شاباش 🎉"
-          : "غلط جواب۔ درست جواب: " + q.o[q.a];
-
-    };
-
-    document.getElementById("options").appendChild(b);
-
-  });
-
+function makeQuiz(){
+ currentQuestion=0;
+ showQuestion();
 }
 
-function nextQuestion() {
-  qi = (qi + 1) % questions.length;
-  showQuestion();
+function showQuestion(){
+ const box=document.getElementById("quizBox");
+ const q=questions[currentQuestion];
+
+ box.innerHTML="";
+ const heading=document.createElement("h3");
+ heading.textContent=(currentQuestion+1)+". "+q.q;
+ box.appendChild(heading);
+
+ q.a.forEach((answer,index)=>{
+  const button=document.createElement("button");
+  button.className="btn";
+  button.style.display="block";
+  button.style.width="100%";
+  button.textContent=answer;
+  button.onclick=()=>{
+   if(index===q.correct){
+    alert("درست جواب! شاباش 🎉");
+   }else{
+    alert("غلط جواب۔ دوبارہ کوشش کریں۔");
+   }
+   currentQuestion=(currentQuestion+1)%questions.length;
+   showQuestion();
+  };
+  box.appendChild(button);
+ });
 }
 
-// TEXT COUNTER
+/* TEXT TOOLS */
+const toolText=document.getElementById("toolText");
 
-function countText() {
+toolText.addEventListener("input",()=>{
+ const text=toolText.value.trim();
+ const words=text?text.split(/\s+/).length:0;
+ document.getElementById("wordCount").textContent=
+ "الفاظ: "+words+" | حروف: "+toolText.value.length;
+});
 
-  const t =
-    document.getElementById("counterText").value;
-
-  const words = t.trim()
-    ? t.trim().split(/\s+/).length
-    : 0;
-
-  document.getElementById("countResult").textContent =
-    "الفاظ: " + words + " | حروف: " + t.length;
-
+async function copyText(){
+ try{
+  await navigator.clipboard.writeText(toolText.value);
+  alert("Text Copy ہوگیا!");
+ }catch(e){
+  toolText.select();
+  alert("متن منتخب ہوگیا، Copy کریں۔");
+ }
 }
 
-// COPY TEXT
-
-function copyText() {
-
-  const t =
-    document.getElementById("counterText").value;
-
-  if (t) {
-    navigator.clipboard.writeText(t)
-      .then(() => alert("متن کاپی ہوگیا۔"))
-      .catch(() => alert("متن کاپی نہیں ہوسکا۔"));
-  }
-
+function clearText(){
+ toolText.value="";
+ toolText.dispatchEvent(new Event("input"));
 }
+</script>
 
-// INITIALIZE
-
-showQuestion();
-restoreChat();
-
-// PWA SERVICE WORKER
-
-if ("serviceWorker" in navigator) {
-
-  window.addEventListener("load", () => {
-
-    navigator.serviceWorker.register("./sw.js")
-      .catch(error => console.log("PWA:", error));
-
-  });
-
-}
+</body>
+ </html>
+ 
