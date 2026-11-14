@@ -5,11 +5,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080b18">
-<meta name="description" content="NEXORA AI - Your Smart AI World">
+<meta name="description" content="NEXORA AI - Your Smart AI World. AI Chatbot, Video Generator, Education and Smart Tools.">
+<meta name="application-name" content="NEXORA AI">
 
-<!-- PWA SETTINGS -->
 <link rel="manifest" href="/NEXORA-AI-/manifest.json">
 <link rel="apple-touch-icon" href="/NEXORA-AI-/icons/icon-192.png">
+<link rel="icon" type="image/png" href="/NEXORA-AI-/icons/icon-192.png">
+
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <title>NEXORA AI | Smart AI Platform</title>
 
@@ -27,11 +32,7 @@ header{
  background:#10172b;
  border-bottom:1px solid #263657;
 }
-header h1{
- margin:0;
- color:#35eaff;
- font-size:30px;
-}
+header h1{margin:0;color:#35eaff;font-size:30px}
 header p{color:#aaa;margin:8px 0 0}
 nav{
  display:flex;
@@ -52,14 +53,8 @@ nav button{
  color:white;
  cursor:pointer;
 }
-nav button:hover,.active{
- background:#087f9e!important;
-}
-main{
- max-width:900px;
- margin:auto;
- padding:15px;
-}
+nav button:hover,.active{background:#087f9e!important}
+main{max-width:900px;margin:auto;padding:15px}
 .panel{
  display:none;
  background:#10182b;
@@ -113,6 +108,15 @@ footer{
  padding:25px;
  border-top:1px solid #263653;
 }
+.install-btn{
+ background:linear-gradient(90deg,#00c9a7,#087f9e);
+ display:none;
+}
+@media(max-width:480px){
+ header h1{font-size:25px}
+ main{padding:10px}
+ .panel{padding:13px}
+}
 </style>
 </head>
 
@@ -122,6 +126,7 @@ footer{
 <h1>⚡ NEXORA AI</h1>
 <p>YOUR SMART AI WORLD</p>
 <p class="small">Chat • Video • Education • Smart Tools</p>
+<button id="installBtn" class="btn install-btn">📲 Install NEXORA AI</button>
 </header>
 
 <nav>
@@ -133,53 +138,41 @@ footer{
 
 <main>
 
-<!-- AI CHATBOT -->
 <section id="chat" class="panel show">
 <h2>🤖 NEXORA AI Chatbot</h2>
 <p class="small">اپنا سوال لکھیں، NEXORA AI سے جواب حاصل کریں۔</p>
-
 <div id="chatHistory" class="answer">
 السلام علیکم! میں NEXORA AI ہوں۔ آپ کی کیا مدد کرسکتا ہوں؟
 </div>
-
 <textarea id="chatInput" placeholder="اپنا سوال یہاں لکھیں..."></textarea>
-
 <button class="btn" id="sendBtn" onclick="sendMessage()">پیغام بھیجیں ➤</button>
 <button class="btn" onclick="clearChat()">🗑️ چیٹ صاف کریں</button>
 <p class="small">چیٹ کی ہسٹری اسی براؤزر میں محفوظ ہوتی ہے۔</p>
 </section>
 
-<!-- VIDEO GENERATOR -->
 <section id="video" class="panel">
 <h2>🎬 Magic Hour AI Video Generator</h2>
-<p class="small">اپنی ویڈیو کا آئیڈیا لکھیں۔ AI ویڈیو بنانے کی درخواست بھیجے گا۔</p>
-
-<textarea id="videoPrompt" placeholder="مثلاً: ایک خوبصورت سبز باغ میں چلتا ہوا گھوڑا، سنیماٹک ویڈیو..."></textarea>
-
+<p class="small">اپنی ویڈیو کا آئیڈیا لکھیں۔</p>
+<textarea id="videoPrompt" placeholder="مثلاً: ایک خوبصورت سبز باغ میں چلتا ہوا گھوڑا..."></textarea>
 <label>ویڈیو کا دورانیہ</label>
 <select id="videoDuration">
 <option value="5">5 Seconds</option>
 <option value="10" selected>10 Seconds</option>
 </select>
-
 <button class="btn" id="videoBtn" onclick="generateVideo()">🎬 AI ویڈیو بنائیں</button>
-
 <div id="videoResult" class="answer">آپ کی ویڈیو یہاں ظاہر ہوگی۔</div>
 <div id="videoOutput"></div>
 </section>
 
-<!-- EDUCATION -->
 <section id="education" class="panel">
 <h2>🎓 NEXORA Education</h2>
 <p>اپنی کلاس منتخب کریں:</p>
-
 <select id="classSelect">
 <option value="9">Class 9</option>
 <option value="10">Class 10</option>
 <option value="11">Class 11</option>
 <option value="12">Class 12</option>
 </select>
-
 <select id="subjectSelect">
 <option>Physics</option>
 <option>Chemistry</option>
@@ -190,12 +183,10 @@ footer{
 <option>Computer Science</option>
 <option>Islamic Studies</option>
 </select>
-
 <button class="btn" onclick="makeQuiz()">MCQs شروع کریں</button>
 <div id="quizBox" class="answer">MCQs یہاں ظاہر ہوں گے۔</div>
 </section>
 
-<!-- TOOLS -->
 <section id="tools" class="panel">
 <h2>🛠️ Smart Text Tools</h2>
 <textarea id="toolText" placeholder="اپنا متن لکھیں..."></textarea>
@@ -210,10 +201,11 @@ footer{
 <h3>NEXORA AI</h3>
 <p>Founder & Chief Admin: Abdul Sattar</p>
 <p>Quality AI & Education For Everyone</p>
+<p class="small">Your Smart AI World © 2026</p>
 </footer>
 
 <script>
-/* NEXORA AI SERVER */
+/* CLOUDFLARE AI SERVER - ORIGINAL */
 const NEXORA_SERVER =
 "https://abdul-ai-server.abdulsattar76556788.workers.dev";
 
@@ -226,11 +218,12 @@ function showPanel(id,button){
 }
 
 /* CHAT MEMORY */
-const chatHistory = document.getElementById("chatHistory");
-let messages = [];
+const chatHistory=document.getElementById("chatHistory");
+let messages=[];
 
 try{
- messages = JSON.parse(localStorage.getItem("nexora_chat") || "[]");
+ messages=JSON.parse(localStorage.getItem("nexora_chat")||"[]");
+ if(!Array.isArray(messages))messages=[];
 }catch(e){messages=[];}
 
 function renderChat(){
@@ -251,18 +244,18 @@ function renderChat(){
  });
  chatHistory.scrollTop=chatHistory.scrollHeight;
 }
-
 renderChat();
 
 function saveChat(){
- localStorage.setItem("nexora_chat",JSON.stringify(messages));
+ try{
+  localStorage.setItem("nexora_chat",JSON.stringify(messages));
+ }catch(e){console.error("Chat save error",e);}
 }
 
 async function sendMessage(){
  const input=document.getElementById("chatInput");
  const button=document.getElementById("sendBtn");
  const message=input.value.trim();
-
  if(!message)return;
 
  messages.push({role:"user",content:message});
@@ -276,38 +269,33 @@ async function sendMessage(){
   const response=await fetch(NEXORA_SERVER,{
    method:"POST",
    headers:{"Content-Type":"application/json"},
-   body:JSON.stringify({message:message})
+   body:JSON.stringify({message})
   });
 
   const data=await response.json();
-
   if(!response.ok){
-   throw new Error(data.error || data.message || "Server error");
+   throw new Error(data.error||data.message||"Server error");
   }
 
-  const answer=
-   data.reply || data.answer || data.message ||
-   "سرور سے جواب موصول نہیں ہوا۔";
+  const answer=data.reply||data.answer||data.message||
+  "سرور سے جواب موصول نہیں ہوا۔";
 
   messages.push({role:"assistant",content:answer});
-  saveChat();
-  renderChat();
-
  }catch(error){
   messages.push({
    role:"assistant",
    content:"کنکشن میں مسئلہ: "+error.message
   });
-  saveChat();
-  renderChat();
- }finally{
-  button.disabled=false;
-  button.textContent="پیغام بھیجیں ➤";
  }
+ saveChat();
+ renderChat();
+
+ button.disabled=false;
+ button.textContent="پیغام بھیجیں ➤";
 }
 
 document.getElementById("chatInput").addEventListener("keydown",function(e){
- if(e.key==="Enter" && !e.shiftKey){
+ if(e.key==="Enter"&&!e.shiftKey){
   e.preventDefault();
   sendMessage();
  }
@@ -321,7 +309,7 @@ function clearChat(){
  }
 }
 
-/* MAGIC HOUR VIDEO GENERATOR */
+/* ORIGINAL MAGIC HOUR VIDEO GENERATOR */
 async function generateVideo(){
  const prompt=document.getElementById("videoPrompt").value.trim();
  const duration=Number(document.getElementById("videoDuration").value);
@@ -343,26 +331,19 @@ async function generateVideo(){
    method:"POST",
    headers:{"Content-Type":"application/json"},
    body:JSON.stringify({
-    prompt:prompt,
-    duration:duration,
-    aspect_ratio:"9:16"
+    prompt,duration,aspect_ratio:"9:16"
    })
   });
 
   const created=await createResponse.json();
-
   if(!createResponse.ok){
-   throw new Error(created.error || created.message || "Video request failed");
+   throw new Error(created.error||created.message||"Video request failed");
   }
 
-  const projectId=created.project_id || created.id;
+  const projectId=created.project_id||created.id;
+  if(!projectId)throw new Error("Video Project ID نہیں ملی۔");
 
-  if(!projectId){
-   throw new Error("سرور سے Video Project ID نہیں ملی۔");
-  }
-
-  result.textContent="درخواست قبول ہوگئی۔ ویڈیو تیار ہو رہی ہے...";
-
+  result.textContent="ویڈیو تیار ہو رہی ہے...";
   let completed=false;
 
   for(let i=0;i<45;i++){
@@ -371,32 +352,26 @@ async function generateVideo(){
    const statusResponse=await fetch(
     NEXORA_SERVER+"/video/status?id="+encodeURIComponent(projectId)
    );
-
    const statusData=await statusResponse.json();
 
    if(!statusResponse.ok){
-    throw new Error(statusData.error || "Status check failed");
+    throw new Error(statusData.error||"Status check failed");
    }
 
-   const status=String(statusData.status || "").toLowerCase();
+   const status=String(statusData.status||"").toLowerCase();
+   result.textContent="ویڈیو تیار ہو رہی ہے... "+(i+1)+"/45 — "+status;
 
-   result.textContent="ویڈیو تیار ہو رہی ہے... ("+(i+1)+"/45) — "+status;
-
-   if(status==="complete" || status==="completed"){
+   if(status==="complete"||status==="completed"){
     const downloads=statusData.downloads;
-    let videoUrl=statusData.video_url || "";
+    let videoUrl=statusData.video_url||"";
 
-    if(!videoUrl && Array.isArray(downloads) && downloads.length){
-     videoUrl=downloads[0].url || downloads[0].download_url || "";
+    if(!videoUrl&&Array.isArray(downloads)&&downloads.length){
+     videoUrl=downloads[0].url||downloads[0].download_url||"";
     }
-
-    if(!videoUrl && downloads && !Array.isArray(downloads)){
-     videoUrl=downloads.url || downloads.download_url || "";
+    if(!videoUrl&&downloads&&!Array.isArray(downloads)){
+     videoUrl=downloads.url||downloads.download_url||"";
     }
-
-    if(!videoUrl){
-     throw new Error("ویڈیو تیار ہوگئی مگر Download URL نہیں ملی۔");
-    }
+    if(!videoUrl)throw new Error("Download URL نہیں ملی۔");
 
     const video=document.createElement("video");
     video.controls=true;
@@ -419,15 +394,14 @@ async function generateVideo(){
     break;
    }
 
-   if(status==="error" || status==="failed" || status==="canceled"){
-    throw new Error(statusData.error || "ویڈیو بنانے میں مسئلہ آگیا۔");
+   if(["error","failed","canceled"].includes(status)){
+    throw new Error(statusData.error||"ویڈیو بنانے میں مسئلہ آگیا۔");
    }
   }
 
   if(!completed){
-   result.textContent="ویڈیو ابھی تیار نہیں ہوئی۔ کچھ دیر بعد دوبارہ Status چیک کریں۔";
+   result.textContent="ویڈیو ابھی تیار نہیں ہوئی۔ بعد میں دوبارہ کوشش کریں۔";
   }
-
  }catch(error){
   result.textContent="❌ مسئلہ: "+error.message;
  }finally{
@@ -435,7 +409,7 @@ async function generateVideo(){
  }
 }
 
-/* EDUCATION MCQS */
+/* EDUCATION MCQS - ORIGINAL */
 const questions=[
  {q:"پاکستان کا دارالحکومت کیا ہے؟",a:["کراچی","اسلام آباد","لاہور","ملتان"],correct:1},
  {q:"پانی کا کیمیائی فارمولا کیا ہے؟",a:["CO2","O2","H2O","NaCl"],correct:2},
@@ -453,8 +427,8 @@ function makeQuiz(){
 function showQuestion(){
  const box=document.getElementById("quizBox");
  const q=questions[currentQuestion];
-
  box.innerHTML="";
+
  const heading=document.createElement("h3");
  heading.textContent=(currentQuestion+1)+". "+q.q;
  box.appendChild(heading);
@@ -466,11 +440,7 @@ function showQuestion(){
   button.style.width="100%";
   button.textContent=answer;
   button.onclick=()=>{
-   if(index===q.correct){
-    alert("درست جواب! شاباش 🎉");
-   }else{
-    alert("غلط جواب۔ دوبارہ کوشش کریں۔");
-   }
+   alert(index===q.correct?"درست جواب! شاباش 🎉":"غلط جواب۔ دوبارہ کوشش کریں۔");
    currentQuestion=(currentQuestion+1)%questions.length;
    showQuestion();
   };
@@ -503,7 +473,30 @@ function clearText(){
  toolText.dispatchEvent(new Event("input"));
 }
 
-/* PWA SERVICE WORKER */
+/* INSTALL APP */
+let deferredPrompt;
+const installBtn=document.getElementById("installBtn");
+
+window.addEventListener("beforeinstallprompt",event=>{
+ event.preventDefault();
+ deferredPrompt=event;
+ installBtn.style.display="inline-block";
+});
+
+installBtn.addEventListener("click",async()=>{
+ if(!deferredPrompt)return;
+ deferredPrompt.prompt();
+ await deferredPrompt.userChoice;
+ deferredPrompt=null;
+ installBtn.style.display="none";
+});
+
+window.addEventListener("appinstalled",()=>{
+ installBtn.style.display="none";
+ console.log("NEXORA AI Installed");
+});
+
+/* SERVICE WORKER */
 if("serviceWorker" in navigator){
  window.addEventListener("load",()=>{
   navigator.serviceWorker.register(
@@ -512,12 +505,12 @@ if("serviceWorker" in navigator){
   ).then(()=>{
    console.log("NEXORA AI PWA Ready");
   }).catch(error=>{
-   console.log("PWA Registration Error:",error);
+   console.error("PWA Registration Error:",error);
   });
  });
 }
 </script>
 
 </body>
-                                                         </html>
+ </html>
  
