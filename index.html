@@ -5,117 +5,142 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080b18">
-<meta name="description" content="NEXORA AI - Your Smart AI World. AI Chatbot, Video Generator, Education and Smart Tools.">
-<meta name="application-name" content="NEXORA AI">
+<meta name="description" content="NEXORA AI - Your Smart AI World">
+<title>NEXORA AI | Your Smart AI World</title>
 
 <link rel="manifest" href="/NEXORA-AI-/manifest.json">
-<link rel="apple-touch-icon" href="/NEXORA-AI-/icons/icon-192.png">
-<link rel="icon" type="image/png" href="/NEXORA-AI-/icons/icon-192.png">
-
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-<title>NEXORA AI | Smart AI Platform</title>
 
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#080b18;
- color:#fff;
+:root {
+  --bg:#080b18;
+  --panel:#11182b;
+  --cyan:#39d9ff;
+  --purple:#a78bfa;
+  --text:#f5f7ff;
+  --muted:#aab4cc;
 }
-header{
- padding:18px;
- text-align:center;
- background:#10172b;
- border-bottom:1px solid #263657;
+* {box-sizing:border-box}
+body {
+  margin:0;
+  background:radial-gradient(circle at top,#17213c,var(--bg) 55%);
+  color:var(--text);
+  font-family:Arial,"Noto Nastaliq Urdu",sans-serif;
+  min-height:100vh;
 }
-header h1{margin:0;color:#35eaff;font-size:30px}
-header p{color:#aaa;margin:8px 0 0}
-nav{
- display:flex;
- gap:8px;
- padding:12px;
- overflow-x:auto;
- background:#0c1325;
- position:sticky;
- top:0;
- z-index:5;
+header {
+  padding:24px 16px;
+  text-align:center;
+  border-bottom:1px solid #26334f;
 }
-nav button{
- flex-shrink:0;
- padding:11px 16px;
- border:1px solid #263c60;
- border-radius:10px;
- background:#151f36;
- color:white;
- cursor:pointer;
+.logo {
+  font-size:32px;
+  font-weight:900;
+  color:var(--cyan);
+  text-shadow:0 0 18px #39d9ff66;
 }
-nav button:hover,.active{background:#087f9e!important}
-main{max-width:900px;margin:auto;padding:15px}
-.panel{
- display:none;
- background:#10182b;
- border:1px solid #243653;
- border-radius:16px;
- padding:18px;
- margin-bottom:18px;
+header p {color:var(--muted);margin:8px}
+nav {
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  padding:18px 10px;
+  flex-wrap:wrap;
 }
-.panel.show{display:block}
-h2{color:#35eaff}
-input,textarea,select{
- width:100%;
- padding:14px;
- margin:8px 0;
- border:1px solid #344967;
- border-radius:10px;
- background:#080f20;
- color:white;
- font-size:15px;
+nav button,.action {
+  border:1px solid #344568;
+  background:#151e35;
+  color:white;
+  padding:12px 22px;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:15px;
 }
-textarea{min-height:110px;resize:vertical}
-.btn{
- padding:12px 18px;
- border:0;
- border-radius:10px;
- background:linear-gradient(90deg,#00bcd4,#7655ff);
- color:white;
- font-weight:bold;
- cursor:pointer;
- margin:5px 0;
+nav button.active,.action.primary {
+  background:linear-gradient(110deg,#087eaa,#6845c7);
+  border:0;
 }
-.btn:disabled{opacity:.5}
-.answer{
- white-space:pre-wrap;
- overflow-wrap:anywhere;
- line-height:1.8;
- background:#080f20;
- border:1px solid #263b5b;
- padding:14px;
- border-radius:10px;
- margin-top:12px;
- min-height:40px;
+main {
+  width:min(900px,94%);
+  margin:15px auto 50px;
 }
-.small{color:#9baac2;font-size:13px}
-.chatrow{margin:12px 0}
-.chatrow strong{color:#35eaff}
-video{width:100%;border-radius:12px;margin-top:12px}
-footer{
- text-align:center;
- color:#9baac2;
- padding:25px;
- border-top:1px solid #263653;
+.hero {
+  text-align:center;
+  padding:20px 10px;
 }
-.install-btn{
- background:linear-gradient(90deg,#00c9a7,#087f9e);
- display:none;
+.hero h1 {font-size:27px}
+.hero p {color:var(--muted)}
+.panel {
+  background:linear-gradient(145deg,#141e35,#0e1426);
+  border:1px solid #263653;
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 12px 40px #0005;
 }
-@media(max-width:480px){
- header h1{font-size:25px}
- main{padding:10px}
- .panel{padding:13px}
+.section {display:none}
+.section.active {display:block}
+.chatbox {
+  height:390px;
+  overflow-y:auto;
+  padding:12px;
+  background:#090f20;
+  border:1px solid #263653;
+  border-radius:13px;
+  margin-bottom:14px;
+}
+.msg {
+  padding:12px 15px;
+  margin:10px 0;
+  border-radius:13px;
+  max-width:90%;
+  line-height:1.8;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+.bot {background:#192844;margin-left:auto}
+.user {background:#164b69;margin-right:auto}
+.chat-input {
+  display:flex;
+  gap:8px;
+}
+input,textarea,select {
+  width:100%;
+  background:#090f20;
+  color:white;
+  border:1px solid #344568;
+  border-radius:11px;
+  padding:13px;
+  font-size:15px;
+  outline:none;
+}
+textarea {resize:vertical;min-height:110px}
+button:disabled {opacity:.5;cursor:not-allowed}
+.action {margin-top:10px}
+.output {
+  background:#090f20;
+  border:1px solid #263653;
+  border-radius:12px;
+  padding:16px;
+  margin-top:18px;
+  line-height:1.9;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+.field {margin:14px 0}
+label {display:block;margin-bottom:8px;color:#c9d5ee}
+footer {
+  text-align:center;
+  color:var(--muted);
+  padding:25px 10px;
+  border-top:1px solid #263653;
+  line-height:2;
+}
+.small {font-size:12px;color:var(--muted)}
+@media(max-width:600px) {
+  .logo {font-size:27px}
+  .panel {padding:13px}
+  .chatbox {height:55vh;min-height:300px}
+  .chat-input {flex-direction:column}
+  .chat-input button {width:100%}
 }
 </style>
 </head>
@@ -123,394 +148,246 @@ footer{
 <body>
 
 <header>
-<h1>⚡ NEXORA AI</h1>
-<p>YOUR SMART AI WORLD</p>
-<p class="small">Chat • Video • Education • Smart Tools</p>
-<button id="installBtn" class="btn install-btn">📲 Install NEXORA AI</button>
+  <div class="logo">⚡ NEXORA AI</div>
+  <p>YOUR SMART AI WORLD</p>
+  <p class="small">ایک اسمارٹ AI ساتھی، ایک نیا ویڈیو اسٹوڈیو</p>
 </header>
 
 <nav>
-<button class="active" onclick="showPanel('chat',this)">🤖 AI Chat</button>
-<button onclick="showPanel('video',this)">🎬 AI Video</button>
-<button onclick="showPanel('education',this)">🎓 Education</button>
-<button onclick="showPanel('tools',this)">🛠️ Tools</button>
+  <button id="chatTab" class="active" onclick="showSection('chat')">
+    🤖 AI Chatbot
+  </button>
+  <button id="videoTab" onclick="showSection('video')">
+    🎬 AI Video Studio
+  </button>
 </nav>
 
 <main>
+  <div class="hero">
+    <h1>خوش آمدید NEXORA AI میں</h1>
+    <p>آپ کے خیالات کو AI کی طاقت دینے کا نیا انداز</p>
+  </div>
 
-<section id="chat" class="panel show">
-<h2>🤖 NEXORA AI Chatbot</h2>
-<p class="small">اپنا سوال لکھیں، NEXORA AI سے جواب حاصل کریں۔</p>
-<div id="chatHistory" class="answer">
-السلام علیکم! میں NEXORA AI ہوں۔ آپ کی کیا مدد کرسکتا ہوں؟
-</div>
-<textarea id="chatInput" placeholder="اپنا سوال یہاں لکھیں..."></textarea>
-<button class="btn" id="sendBtn" onclick="sendMessage()">پیغام بھیجیں ➤</button>
-<button class="btn" onclick="clearChat()">🗑️ چیٹ صاف کریں</button>
-<p class="small">چیٹ کی ہسٹری اسی براؤزر میں محفوظ ہوتی ہے۔</p>
-</section>
+  <!-- AI CHATBOT -->
+  <section id="chat" class="section active">
+    <div class="panel">
+      <h2>🤖 AI Chatbot</h2>
+      <p class="small">اپنا سوال لکھیں اور AI سے جواب حاصل کریں۔</p>
 
-<section id="video" class="panel">
-<h2>🎬 Magic Hour AI Video Generator</h2>
-<p class="small">اپنی ویڈیو کا آئیڈیا لکھیں۔</p>
-<textarea id="videoPrompt" placeholder="مثلاً: ایک خوبصورت سبز باغ میں چلتا ہوا گھوڑا..."></textarea>
-<label>ویڈیو کا دورانیہ</label>
-<select id="videoDuration">
-<option value="5">5 Seconds</option>
-<option value="10" selected>10 Seconds</option>
-</select>
-<button class="btn" id="videoBtn" onclick="generateVideo()">🎬 AI ویڈیو بنائیں</button>
-<div id="videoResult" class="answer">آپ کی ویڈیو یہاں ظاہر ہوگی۔</div>
-<div id="videoOutput"></div>
-</section>
+      <div class="chatbox" id="chatBox">
+        <div class="msg bot">السلام علیکم! میں NEXORA AI ہوں۔ آپ کی کیا مدد کر سکتا ہوں؟</div>
+      </div>
 
-<section id="education" class="panel">
-<h2>🎓 NEXORA Education</h2>
-<p>اپنی کلاس منتخب کریں:</p>
-<select id="classSelect">
-<option value="9">Class 9</option>
-<option value="10">Class 10</option>
-<option value="11">Class 11</option>
-<option value="12">Class 12</option>
-</select>
-<select id="subjectSelect">
-<option>Physics</option>
-<option>Chemistry</option>
-<option>Biology</option>
-<option>Mathematics</option>
-<option>English</option>
-<option>Urdu</option>
-<option>Computer Science</option>
-<option>Islamic Studies</option>
-</select>
-<button class="btn" onclick="makeQuiz()">MCQs شروع کریں</button>
-<div id="quizBox" class="answer">MCQs یہاں ظاہر ہوں گے۔</div>
-</section>
+      <div class="chat-input">
+        <input id="message" type="text" placeholder="اپنا سوال یہاں لکھیں..." onkeydown="if(event.key==='Enter') sendMessage()">
+        <button class="action primary" id="sendBtn" onclick="sendMessage()">بھیجیں ➤</button>
+      </div>
+      <p class="small">نوٹ: گفتگو صرف موجودہ صفحے تک رہے گی، ریفریش کرنے پر ختم ہو جائے گی۔</p>
+    </div>
+  </section>
 
-<section id="tools" class="panel">
-<h2>🛠️ Smart Text Tools</h2>
-<textarea id="toolText" placeholder="اپنا متن لکھیں..."></textarea>
-<p id="wordCount" class="small">الفاظ: 0 | حروف: 0</p>
-<button class="btn" onclick="copyText()">📋 Copy Text</button>
-<button class="btn" onclick="clearText()">صاف کریں</button>
-</section>
+  <!-- VIDEO STUDIO -->
+  <section id="video" class="section">
+    <div class="panel">
+      <h2>🎬 AI Video Studio</h2>
+      <p class="small">اپنے خیال سے ویڈیو کا اسکرپٹ اور سین تیار کریں۔</p>
 
+      <div class="field">
+        <label>ویڈیو کا موضوع</label>
+        <textarea id="topic" placeholder="مثلاً: ایک خوبصورت گاؤں کی زندگی، اسلامی معلومات، تعلیمی ویڈیو..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>ویڈیو کا انداز</label>
+        <select id="style">
+          <option>سینیمیٹک ویڈیو</option>
+          <option>تعلیمی ویڈیو</option>
+          <option>اسلامی معلوماتی ویڈیو</option>
+          <option>کارٹون اور اینیمیشن</option>
+          <option>سوشل میڈیا Reel</option>
+          <option>موٹیویشنل ویڈیو</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>ویڈیو کا دورانیہ</label>
+        <select id="duration">
+          <option>15 سیکنڈ</option>
+          <option>30 سیکنڈ</option>
+          <option>60 سیکنڈ</option>
+          <option>2 منٹ</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>ویڈیو سائز</label>
+        <select id="ratio">
+          <option>9:16 موبائل / Reel</option>
+          <option>16:9 YouTube</option>
+          <option>1:1 Square</option>
+        </select>
+      </div>
+
+      <button class="action primary" onclick="makeVideoPlan()">✨ ویڈیو اسکرپٹ تیار کریں</button>
+
+      <div id="videoOutput" class="output" style="display:none"></div>
+      <button id="copyBtn" class="action" style="display:none" onclick="copyVideo()">📋 کاپی کریں</button>
+
+      <p class="small">یہ اسٹوڈیو اسکرپٹ اور ویڈیو پرامپٹ تیار کرتا ہے۔ اصل MP4 ویڈیو بنانے کے لیے الگ Video Generation API درکار ہوگی۔</p>
+    </div>
+  </section>
 </main>
 
 <footer>
-<h3>NEXORA AI</h3>
-<p>Founder & Chief Admin: Abdul Sattar</p>
-<p>Quality AI & Education For Everyone</p>
-<p class="small">Your Smart AI World © 2026</p>
+  ⚡ NEXORA AI — YOUR SMART AI WORLD
+  <br>
+  Founder & Chief Admin: Abdul Sattar
+  <br>
+  Quality AI For Everyone
 </footer>
 
 <script>
-/* CLOUDFLARE AI SERVER - ORIGINAL */
-const NEXORA_SERVER =
-"https://abdul-ai-server.abdulsattar76556788.workers.dev";
+const API_URL = "https://abdul-ai-server.abdulsattar76556788.workers.dev/";
 
-/* NAVIGATION */
-function showPanel(id,button){
- document.querySelectorAll(".panel").forEach(p=>p.classList.remove("show"));
- document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
- document.getElementById(id).classList.add("show");
- button.classList.add("active");
+function showSection(name) {
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  document.getElementById(name).classList.add("active");
+
+  document.getElementById("chatTab").classList.toggle("active", name === "chat");
+  document.getElementById("videoTab").classList.toggle("active", name === "video");
 }
 
-/* CHAT MEMORY */
-const chatHistory=document.getElementById("chatHistory");
-let messages=[];
-
-try{
- messages=JSON.parse(localStorage.getItem("nexora_chat")||"[]");
- if(!Array.isArray(messages))messages=[];
-}catch(e){messages=[];}
-
-function renderChat(){
- chatHistory.innerHTML="";
- if(!messages.length){
-  chatHistory.textContent="السلام علیکم! میں NEXORA AI ہوں۔";
-  return;
- }
- messages.forEach(m=>{
-  const div=document.createElement("div");
-  div.className="chatrow";
-  const title=document.createElement("strong");
-  title.textContent=m.role==="user"?"آپ: ":"NEXORA AI: ";
-  const content=document.createElement("span");
-  content.textContent=m.content;
-  div.append(title,content);
-  chatHistory.appendChild(div);
- });
- chatHistory.scrollTop=chatHistory.scrollHeight;
-}
-renderChat();
-
-function saveChat(){
- try{
-  localStorage.setItem("nexora_chat",JSON.stringify(messages));
- }catch(e){console.error("Chat save error",e);}
+function addMessage(text, type) {
+  const box = document.getElementById("chatBox");
+  const div = document.createElement("div");
+  div.className = "msg " + type;
+  div.textContent = text;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+  return div;
 }
 
-async function sendMessage(){
- const input=document.getElementById("chatInput");
- const button=document.getElementById("sendBtn");
- const message=input.value.trim();
- if(!message)return;
+async function sendMessage() {
+  const input = document.getElementById("message");
+  const btn = document.getElementById("sendBtn");
+  const message = input.value.trim();
 
- messages.push({role:"user",content:message});
- saveChat();
- renderChat();
- input.value="";
- button.disabled=true;
- button.textContent="جواب تیار ہو رہا ہے...";
+  if (!message) return;
 
- try{
-  const response=await fetch(NEXORA_SERVER,{
-   method:"POST",
-   headers:{"Content-Type":"application/json"},
-   body:JSON.stringify({message})
-  });
+  addMessage(message, "user");
+  input.value = "";
+  btn.disabled = true;
 
-  const data=await response.json();
-  if(!response.ok){
-   throw new Error(data.error||data.message||"Server error");
-  }
+  const loading = addMessage("جواب تیار ہو رہا ہے... براہ کرم انتظار کریں۔", "bot");
 
-  const answer=data.reply||data.answer||data.message||
-  "سرور سے جواب موصول نہیں ہوا۔";
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({message: message})
+    });
 
-  messages.push({role:"assistant",content:answer});
- }catch(error){
-  messages.push({
-   role:"assistant",
-   content:"کنکشن میں مسئلہ: "+error.message
-  });
- }
- saveChat();
- renderChat();
+    const data = await response.json();
 
- button.disabled=false;
- button.textContent="پیغام بھیجیں ➤";
-}
-
-document.getElementById("chatInput").addEventListener("keydown",function(e){
- if(e.key==="Enter"&&!e.shiftKey){
-  e.preventDefault();
-  sendMessage();
- }
-});
-
-function clearChat(){
- if(confirm("کیا آپ واقعی پوری چیٹ صاف کرنا چاہتے ہیں؟")){
-  messages=[];
-  saveChat();
-  renderChat();
- }
-}
-
-/* ORIGINAL MAGIC HOUR VIDEO GENERATOR */
-async function generateVideo(){
- const prompt=document.getElementById("videoPrompt").value.trim();
- const duration=Number(document.getElementById("videoDuration").value);
- const button=document.getElementById("videoBtn");
- const result=document.getElementById("videoResult");
- const output=document.getElementById("videoOutput");
-
- if(!prompt){
-  result.textContent="براہ کرم ویڈیو کا آئیڈیا لکھیں۔";
-  return;
- }
-
- button.disabled=true;
- output.innerHTML="";
- result.textContent="ویڈیو بنانے کی درخواست بھیجی جا رہی ہے...";
-
- try{
-  const createResponse=await fetch(NEXORA_SERVER+"/video/create",{
-   method:"POST",
-   headers:{"Content-Type":"application/json"},
-   body:JSON.stringify({
-    prompt,duration,aspect_ratio:"9:16"
-   })
-  });
-
-  const created=await createResponse.json();
-  if(!createResponse.ok){
-   throw new Error(created.error||created.message||"Video request failed");
-  }
-
-  const projectId=created.project_id||created.id;
-  if(!projectId)throw new Error("Video Project ID نہیں ملی۔");
-
-  result.textContent="ویڈیو تیار ہو رہی ہے...";
-  let completed=false;
-
-  for(let i=0;i<45;i++){
-   await new Promise(resolve=>setTimeout(resolve,8000));
-
-   const statusResponse=await fetch(
-    NEXORA_SERVER+"/video/status?id="+encodeURIComponent(projectId)
-   );
-   const statusData=await statusResponse.json();
-
-   if(!statusResponse.ok){
-    throw new Error(statusData.error||"Status check failed");
-   }
-
-   const status=String(statusData.status||"").toLowerCase();
-   result.textContent="ویڈیو تیار ہو رہی ہے... "+(i+1)+"/45 — "+status;
-
-   if(status==="complete"||status==="completed"){
-    const downloads=statusData.downloads;
-    let videoUrl=statusData.video_url||"";
-
-    if(!videoUrl&&Array.isArray(downloads)&&downloads.length){
-     videoUrl=downloads[0].url||downloads[0].download_url||"";
+    if (!response.ok) {
+      throw new Error(data.error || data.message || "Server error: " + response.status);
     }
-    if(!videoUrl&&downloads&&!Array.isArray(downloads)){
-     videoUrl=downloads.url||downloads.download_url||"";
+
+    const answer = data.reply || data.response || data.answer || data.text;
+
+    if (!answer) {
+      throw new Error("سرور سے جواب موصول نہیں ہوا۔");
     }
-    if(!videoUrl)throw new Error("Download URL نہیں ملی۔");
 
-    const video=document.createElement("video");
-    video.controls=true;
-    video.playsInline=true;
-    video.src=videoUrl;
+    loading.textContent = answer;
 
-    const link=document.createElement("a");
-    link.href=videoUrl;
-    link.target="_blank";
-    link.rel="noopener";
-    link.textContent="⬇️ ویڈیو ڈاؤن لوڈ کریں";
-    link.className="btn";
-    link.style.display="inline-block";
-    link.style.textDecoration="none";
-    link.style.marginTop="12px";
+  } catch (error) {
+    loading.textContent = "معذرت! AI جواب حاصل نہیں ہو سکا۔\n" + error.message;
+  } finally {
+    btn.disabled = false;
+    input.focus();
+  }
+}
 
-    output.append(video,document.createElement("br"),link);
-    result.textContent="✅ آپ کی AI ویڈیو تیار ہوگئی!";
-    completed=true;
-    break;
-   }
+function makeVideoPlan() {
+  const topic = document.getElementById("topic").value.trim();
+  const style = document.getElementById("style").value;
+  const duration = document.getElementById("duration").value;
+  const ratio = document.getElementById("ratio").value;
+  const output = document.getElementById("videoOutput");
 
-   if(["error","failed","canceled"].includes(status)){
-    throw new Error(statusData.error||"ویڈیو بنانے میں مسئلہ آگیا۔");
-   }
+  if (!topic) {
+    alert("براہ کرم ویڈیو کا موضوع لکھیں۔");
+    return;
   }
 
-  if(!completed){
-   result.textContent="ویڈیو ابھی تیار نہیں ہوئی۔ بعد میں دوبارہ کوشش کریں۔";
+  const result =
+`🎬 NEXORA AI VIDEO PLAN
+
+موضوع: ${topic}
+انداز: ${style}
+دورانیہ: ${duration}
+فارمیٹ: ${ratio}
+
+━━━━━━━━━━━━━━━━
+
+🎥 AI VIDEO PROMPT:
+
+Create a high-quality ${style} video about: ${topic}.
+
+Video duration: ${duration}.
+Aspect ratio: ${ratio}.
+
+Use beautiful visuals, smooth camera movements,
+professional lighting, realistic details,
+cinematic transitions and engaging storytelling.
+
+━━━━━━━━━━━━━━━━
+
+📽️ SCENE PLAN:
+
+Scene 1 — Introduction:
+موضوع کا خوبصورت تعارف اور متاثر کن آغاز۔
+
+Scene 2 — Main Visual:
+موضوع کے اہم مناظر، خوبصورت کیمرہ موومنٹ اور تفصیلات۔
+
+Scene 3 — Story:
+موضوع کی مکمل کہانی یا اہم معلومات پیش کریں۔
+
+Scene 4 — Ending:
+ایک خوبصورت اختتام اور یاد رہ جانے والا آخری منظر۔
+
+━━━━━━━━━━━━━━━━
+
+🎙️ VOICEOVER SCRIPT:
+
+السلام علیکم دوستو!
+
+آج ہم بات کریں گے: ${topic}
+
+اس ویڈیو میں ہم آپ کو اس موضوع کی دلچسپ معلومات اور خوبصورت مناظر دکھائیں گے۔
+
+ویڈیو پسند آئے تو اسے دوسروں کے ساتھ ضرور شیئر کریں۔
+
+شکریہ!`;
+
+  output.textContent = result;
+  output.style.display = "block";
+  document.getElementById("copyBtn").style.display = "inline-block";
+}
+
+async function copyVideo() {
+  const text = document.getElementById("videoOutput").textContent;
+  try {
+    await navigator.clipboard.writeText(text);
+    alert("ویڈیو اسکرپٹ کاپی ہوگیا!");
+  } catch {
+    alert("کاپی نہیں ہو سکا، براہ کرم متن منتخب کرکے کاپی کریں۔");
   }
- }catch(error){
-  result.textContent="❌ مسئلہ: "+error.message;
- }finally{
-  button.disabled=false;
- }
-}
-
-/* EDUCATION MCQS - ORIGINAL */
-const questions=[
- {q:"پاکستان کا دارالحکومت کیا ہے؟",a:["کراچی","اسلام آباد","لاہور","ملتان"],correct:1},
- {q:"پانی کا کیمیائی فارمولا کیا ہے؟",a:["CO2","O2","H2O","NaCl"],correct:2},
- {q:"سورج کس سمت سے نکلتا ہے؟",a:["مشرق","مغرب","شمال","جنوب"],correct:0},
- {q:"ایک ہفتے میں کتنے دن ہوتے ہیں؟",a:["5","6","7","8"],correct:2}
-];
-
-let currentQuestion=0;
-
-function makeQuiz(){
- currentQuestion=0;
- showQuestion();
-}
-
-function showQuestion(){
- const box=document.getElementById("quizBox");
- const q=questions[currentQuestion];
- box.innerHTML="";
-
- const heading=document.createElement("h3");
- heading.textContent=(currentQuestion+1)+". "+q.q;
- box.appendChild(heading);
-
- q.a.forEach((answer,index)=>{
-  const button=document.createElement("button");
-  button.className="btn";
-  button.style.display="block";
-  button.style.width="100%";
-  button.textContent=answer;
-  button.onclick=()=>{
-   alert(index===q.correct?"درست جواب! شاباش 🎉":"غلط جواب۔ دوبارہ کوشش کریں۔");
-   currentQuestion=(currentQuestion+1)%questions.length;
-   showQuestion();
-  };
-  box.appendChild(button);
- });
-}
-
-/* TEXT TOOLS */
-const toolText=document.getElementById("toolText");
-
-toolText.addEventListener("input",()=>{
- const text=toolText.value.trim();
- const words=text?text.split(/\s+/).length:0;
- document.getElementById("wordCount").textContent=
- "الفاظ: "+words+" | حروف: "+toolText.value.length;
-});
-
-async function copyText(){
- try{
-  await navigator.clipboard.writeText(toolText.value);
-  alert("Text Copy ہوگیا!");
- }catch(e){
-  toolText.select();
-  alert("متن منتخب ہوگیا، Copy کریں۔");
- }
-}
-
-function clearText(){
- toolText.value="";
- toolText.dispatchEvent(new Event("input"));
-}
-
-/* INSTALL APP */
-let deferredPrompt;
-const installBtn=document.getElementById("installBtn");
-
-window.addEventListener("beforeinstallprompt",event=>{
- event.preventDefault();
- deferredPrompt=event;
- installBtn.style.display="inline-block";
-});
-
-installBtn.addEventListener("click",async()=>{
- if(!deferredPrompt)return;
- deferredPrompt.prompt();
- await deferredPrompt.userChoice;
- deferredPrompt=null;
- installBtn.style.display="none";
-});
-
-window.addEventListener("appinstalled",()=>{
- installBtn.style.display="none";
- console.log("NEXORA AI Installed");
-});
-
-/* SERVICE WORKER */
-if("serviceWorker" in navigator){
- window.addEventListener("load",()=>{
-  navigator.serviceWorker.register(
-   "/NEXORA-AI-/service-worker.js",
-   {scope:"/NEXORA-AI-/"}
-  ).then(()=>{
-   console.log("NEXORA AI PWA Ready");
-  }).catch(error=>{
-   console.error("PWA Registration Error:",error);
-  });
- });
 }
 </script>
 
 </body>
  </html>
- 
+                           
