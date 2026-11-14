@@ -1,15 +1,19 @@
-
 {
   "id": "/NEXORA-AI-/",
   "name": "NEXORA AI",
   "short_name": "NEXORA",
-  "description": "NEXORA AI - Your Smart AI World. AI Chatbot, Video Generator, Education and Smart Tools.",
+  "description": "NEXORA AI - Your Smart AI World. AI Chatbot, Image Generator, Video Tools, Education and Smart Tools.",
   "start_url": "/NEXORA-AI-/",
   "scope": "/NEXORA-AI-/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#080b18",
   "theme_color": "#080b18",
+  "categories": [
+    "education",
+    "utilities",
+    "productivity"
+  ],
   "icons": [
     {
       "src": "/NEXORA-AI-/icons/icon-192.png",
