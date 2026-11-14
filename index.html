@@ -162,6 +162,48 @@ footer {
   </button>
 </nav>
 
+<!-- PHOTO TO VIDEO -->
+<section id="photoVideo" class="section">
+  <div class="panel">
+    <h2>📸 Photo to Video AI</h2>
+    <p class="small">اپنی تصویر اپلوڈ کریں اور اسے ویڈیو میں تبدیل کریں۔</p>
+
+    <div class="field">
+      <label>اپنی تصویر منتخب کریں</label>
+      <input type="file" id="photoInput" accept="image/*">
+    </div>
+
+    <img id="photoPreview"
+      style="display:none;width:100%;max-height:300px;object-fit:contain;border-radius:14px;margin-top:12px">
+
+    <div class="field">
+      <label>ویڈیو کا انداز</label>
+      <select id="photoStyle">
+        <option value="Cinematic">Cinematic</option>
+        <option value="Realistic">Realistic</option>
+        <option value="Slow Motion">Slow Motion</option>
+        <option value="Romantic">Romantic</option>
+        <option value="Nature">Nature</option>
+        <option value="Professional">Professional</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>حرکت کی تفصیل</label>
+      <textarea id="photoMotion"
+        placeholder="مثلاً شخص مسکرائے، کیمرہ آہستہ آہستہ قریب آئے..."></textarea>
+    </div>
+
+    <p><b>قیمت: 150 روپے فی ویڈیو</b></p>
+
+    <button class="action primary" onclick="requestPhotoVideo()">
+      🎬 ویڈیو بنائیں
+    </button>
+
+    <div id="photoVideoOutput" class="output" style="display:none"></div>
+  </div>
+</section>
+  
 <main>
   <div class="hero">
     <h1>خوش آمدید NEXORA AI میں</h1>
