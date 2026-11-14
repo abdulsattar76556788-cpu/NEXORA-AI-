@@ -4,7 +4,9 @@ const CACHE_NAME = "nexora-ai-v2";
 const FILES = [
   "/NEXORA-AI-/",
   "/NEXORA-AI-/index.html",
-  "/NEXORA-AI-/manifest.json"
+  "/NEXORA-AI-/manifest.json",
+  "/NEXORA-AI-/icons/icon-192.png",
+  "/NEXORA-AI-/icons/icon-512.png"
 ];
 
 self.addEventListener("install", event => {
@@ -21,7 +23,7 @@ self.addEventListener("activate", event => {
     caches.keys().then(keys =>
       Promise.all(
         keys.filter(key => key !== CACHE_NAME)
-          .map(key => caches.delete(key))
+        .map(key => caches.delete(key))
       )
     )
   );
@@ -31,16 +33,11 @@ self.addEventListener("activate", event => {
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
 
-  const url = new URL(event.request.url);
-
-  if (url.origin !== self.location.origin) return;
-
   event.respondWith(
-    fetch(event.request).catch(async () => {
-      return await caches.match(event.request) ||
-        new Response("Offline", {
-          status: 503
-        });
-    })
+    fetch(event.request).catch(() =>
+      caches.match(event.request).then(cached =>
+        cached || Response.error()
+      )
+    )
   );
 });
