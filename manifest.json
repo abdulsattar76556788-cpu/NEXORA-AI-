@@ -10,7 +10,11 @@
   "orientation": "portrait",
   "background_color": "#080b18",
   "theme_color": "#080b18",
-  "categories": ["education", "utilities", "productivity"],
+  "categories": [
+    "education",
+    "utilities",
+    "productivity"
+  ],
   "icons": [
     {
       "src": "/NEXORA-AI-/icons/icon-192.png",
