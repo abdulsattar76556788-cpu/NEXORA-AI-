@@ -10,7 +10,18 @@
 
 <link rel="manifest" href="/NEXORA-AI-/manifest.json">
 
-<style>
+
+.chatbox {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.msg {
+  flex-shrink: 0;
+}
+  <style>
 :root {
   --bg:#080b18;
   --panel:#11182b;
