@@ -11,9 +11,8 @@ const FILES = [
 
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache =>
-      cache.addAll(FILES)
-    )
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(FILES))
   );
   self.skipWaiting();
 });
@@ -23,7 +22,10 @@ self.addEventListener("activate", event => {
     caches.keys().then(keys =>
       Promise.all(
         keys
-          .filter(key => key !== CACHE_NAME)
+          .filter(key =>
+            key.startsWith("nexora-ai-") &&
+            key !== CACHE_NAME
+          )
           .map(key => caches.delete(key))
       )
     )
@@ -43,10 +45,13 @@ self.addEventListener("fetch", event => {
       .then(response => {
         if (response.ok) {
           const copy = response.clone();
-          caches.open(CACHE_NAME).then(cache =>
-            cache.put(event.request, copy)
+
+          event.waitUntil(
+            caches.open(CACHE_NAME)
+              .then(cache => cache.put(event.request, copy))
           );
         }
+
         return response;
       })
       .catch(() => caches.match(event.request))
